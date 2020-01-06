@@ -24,4 +24,6 @@ The Apache Software Foundation(2019) Busy Developers' Guide to HSSF and XSSF Fea
 
 JSoup Tutorial. (n.d.). Retrieved from https://www.tutorialspoint.com/jsoup/index.htm.  
 
-CKJM Metric. Retrieved from https://www.spinellis.gr/sw/ckjm/doc/indexw.html.
+CKJM Metric. Retrieved from https://www.spinellis.gr/sw/ckjm/doc/indexw.html.  
+
+CountDownLatch in Java. (2018, April 19). Retrieved from https://www.geeksforgeeks.org/countdownlatch-in-java/.  
