@@ -5,20 +5,20 @@ public class CheckDirectory
 
     public static void checkDir()
     {
-        File repoFolder = new File(Directory.getRepoFolderPath());
+        File repoFolder = new File(Directory.getRepoPathFile());
         if (repoFolder.exists())
         {
-            deleteDir(repoFolder);
+            deleteDirFile(repoFolder);
         }
 
-        makeDir(repoFolder);
-        makeDir(new File(Directory.getLogFolderPath()));
-        makeDir(new File(Directory.getOutFolderPath()));
-        makeDir(new File(Directory.getTxtFolderPath()));
+        makeDirFile(repoFolder);
+        makeDirFile(new File(Directory.getLogPathFile()));
+        makeDirFile(new File(Directory.getOutPathFile()));
+        makeDirFile(new File(Directory.getTextPathFile()));
 
     }
 
-    private static void makeDir(File Directory)
+    private static void makeDirFile(File Directory)
     {
         if (!Directory.exists())
         {
@@ -26,16 +26,16 @@ public class CheckDirectory
         }
     }
 
-    private static boolean deleteDir(File dir)
+    private static boolean deleteDirFile(File dir)
     {
         if (dir.isDirectory())
         {
-            String[] children = dir.list();
-            if (children != null)
+            String[] child1 = dir.list();
+            if (child1 != null)
             {
-                for (String child : children)
+                for (String child2 : child1)
                 {
-                    boolean success = deleteDir(new File(dir, child));
+                    boolean success = deleteDirFile(new File(dir, child2));
                     if (!success) {
                         return false;
                     }

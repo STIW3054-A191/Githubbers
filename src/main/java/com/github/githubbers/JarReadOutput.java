@@ -10,12 +10,12 @@ public class JarReadOutput
     public static class ReadStreamRunnable implements Runnable
     {
 
-        private InputStream inputStream, errorStream;
+        private InputStream inputStreamCall, errorStreamCall;
 
-        public ReadStreamRunnable(InputStream InputStream, InputStream ErrorStream)
+        public ReadStreamRunnable(InputStream InputStreamCall, InputStream ErrorStreamCall)
         {
-            this.inputStream = InputStream;
-            this.errorStream = ErrorStream;
+            this.inputStreamCall = InputStreamCall;
+            this.errorStreamCall = ErrorStreamCall;
         }
 
         @Override
@@ -24,22 +24,22 @@ public class JarReadOutput
 
             try
             {
-                BufferedReader stdInput = new BufferedReader(new InputStreamReader(inputStream));
+                BufferedReader studentInput = new BufferedReader(new InputStreamReader(inputStreamCall));
                 String output;
-                while ((output = stdInput.readLine()) != null)
+                while ((output = studentInput.readLine()) != null)
                 {
                     System.out.println(output + "\n");
                 }
 
-                BufferedReader stdError = new BufferedReader(new InputStreamReader(errorStream));
-                while (stdError.ready())
+                BufferedReader studentError = new BufferedReader(new InputStreamReader(errorStreamCall));
+                while (studentError.ready())
                 {
-                    System.err.println(stdError.readLine() +"\n");
+                    System.err.println(studentError.readLine() + "\n");
                 }
 
-            } catch (Exception ex)
+            } catch (Exception e)
             {
-                ex.printStackTrace();
+                e.printStackTrace();
             }
         }
     }

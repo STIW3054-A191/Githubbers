@@ -23,7 +23,7 @@ public class MavenCompile implements Runnable
     @Override
     public void run()
     {
-        String repoPath = Directory.getRepoFolderPath() + RepoDetails.getName(repoUrl);
+        String repoPath = Directory.getOutputPathFile() + RepoDetails.getName(repoUrl);
         String repoName = RepoDetails.getName(repoUrl);
 
         String pomPath = PomDirectory.getPath(new File(repoPath));

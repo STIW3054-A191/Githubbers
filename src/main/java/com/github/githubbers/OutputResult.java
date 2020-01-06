@@ -4,7 +4,7 @@ import java.util.concurrent.CountDownLatch;
 public class OutputResult
 {
 
-    public static void print(boolean Error, String RepoName, String Comment, CountDownLatch Latch, int TotalLatch)
+    public static void print(boolean Error, String ReName, String Comment, CountDownLatch Latch, int LatchAll)
     {
 
         synchronized (OutputResult.class)
@@ -13,14 +13,14 @@ public class OutputResult
             if (Error)
             {
                 System.err.format("%-10s %-40s %-20s\n",
-                        TotalLatch - Latch.getCount() + 1 + "/" + TotalLatch,
-                        RepoName,
+                        LatchAll - Latch.getCount() + 1 + "/" + LatchAll,
+                        ReName,
                         Comment);
             } else
                 {
                 System.out.format("%-10s %-40s %-20s\n",
-                        TotalLatch - Latch.getCount() + 1 + "/" + TotalLatch,
-                        RepoName,
+                        LatchAll - Latch.getCount() + 1 + "/" + LatchAll,
+                        ReName,
                         Comment);
 
             }

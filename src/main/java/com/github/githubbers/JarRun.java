@@ -5,17 +5,17 @@ import java.util.concurrent.*;
 public class JarRun implements Runnable
 {
 
-    private String pomPath, repoName, matricNo;
+    private String pathPom, reName, matricNum;
     private CountDownLatch latch;
-    private int totalLatch;
+    private int latchAll;
 
-    public JarRun(String PomPath, String RepoName, String MatricNo, CountDownLatch Latch, int TotalLatch)
+    public JarRun(String PathPom, String ReName, String MatricNum, CountDownLatch Latch, int LatchAll)
     {
-        this.pomPath = PomPath;
-        this.repoName = RepoName;
-        this.matricNo = MatricNo;
+        this.pathPom = PathPom;
+        this.reName = ReName;
+        this.matricNum = MatricNum;
         this.latch = Latch;
-        this.totalLatch = TotalLatch;
+        this.latchAll = LatchAll;
     }
 
     @Override
@@ -24,10 +24,10 @@ public class JarRun implements Runnable
 
         try
         {
-            Runtime rt = Runtime.getRuntime();
-            Process proc = rt.exec("java -jar " + JarDirectory.getPath(pomPath), null, new File(Directory.getRepoFolderPath() + repoName));
+            Runtime rTime = Runtime.getRuntime();
+            Process process = rTime.exec("java -jar " + JarDirectory.getPath(pathPom), null, new File(Directory.getOutputPathFile() + reName));
 
-            FutureTask<String> futureTask = new FutureTask<>(new JarCallable(matricNo, repoName, proc.getInputStream(), proc.getErrorStream()));
+            FutureTask<String> futureTask = new FutureTask<>(new JarCallable(matricNum, reName, process.getInputStream(), process.getErrorStream()));
             new Thread(futureTask).start();
 
             try
@@ -35,15 +35,15 @@ public class JarRun implements Runnable
                 String result = futureTask.get(1, TimeUnit.MINUTES);
                 if (result.equals("complete"))
                 {
-                    OutputResult.print(false, repoName, "Jar file successfully completed.", latch, totalLatch);
+                    OutputResult.print(false, reName, "Jar file successfully completed.", latch, latchAll);
                 } else if (result.equals("error"))
                 {
-                    OutputResult.print(true, repoName, "Jar file failed to run.", latch, totalLatch);
+                    OutputResult.print(true, reName, "Jar file failed to run.", latch, latchAll);
                 }
             } catch (TimeoutException e)
             {
-                proc.destroy();
-                OutputResult.print(true, repoName, "Timeout.", latch, totalLatch);
+                process.destroy();
+                OutputResult.print(true, reName, "Timeout.", latch, latchAll);
             }
 
         } catch (IOException | InterruptedException | ExecutionException e)

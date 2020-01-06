@@ -2,25 +2,29 @@ package com.github.githubbers;
 import java.net.URL;
 public class Directory
 {
-    public static String getOutputFolderPath()
+    public static String getOutputPathFile()
     {
         URL location = Directory.class.getProtectionDomain().getCodeSource().getLocation();
         return location.getFile().substring(1).split("target")[0]+"target/output/";
     }
-    public static String getRepoFolderPath()
+
+    public static String getRepoPathFile()
     {
-        return getOutputFolderPath()+"repo/";
+        return getOutputPathFile() + "repo/";
     }
-    public static String getLogFolderPath()
+
+    public static String getLogPathFile()
     {
-        return getOutputFolderPath()+"log/";
+        return getOutputPathFile() + "log/";
     }
-    public static String getOutFolderPath()
+
+    public static String getOutPathFile()
     {
-        return getOutputFolderPath()+"out/";
+        return getOutputPathFile() + "out/";
     }
-    public static String getTxtFolderPath()
+
+    public static String getTextPathFile()
     {
-        return getOutputFolderPath()+"txt/";
+        return getOutputPathFile() + "txt/";
     }
 }
