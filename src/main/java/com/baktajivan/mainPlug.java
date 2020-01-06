@@ -132,7 +132,11 @@ public class mainPlug {
         execRunJar.shutdown();
         latchRunJar.await();
         System.out.println("All Running Jar Completed !");
-
+        
+        //cont your code from here...
+        
+        //Get end time and time elapsed
+        TimeTaken.endAndOutput();
 
     }//main
 
