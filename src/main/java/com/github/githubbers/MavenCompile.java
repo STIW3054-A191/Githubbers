@@ -55,7 +55,7 @@ public class MavenCompile implements Runnable
                     OutputResult.print(false, repoName, "Build succeed.", latch, totalRepo);
                 } else
                     {
-                    LogOutput.save(RepoDetails.getMatricNo(repoUrl), repoName, output.toString());
+                        LogOutput.saveFiles(RepoDetails.getMatricNo(repoUrl), repoName, output.toString());
                     OutputResult.print(true, repoName, "Build Failure !", latch, totalRepo);
                 }
 
@@ -66,7 +66,7 @@ public class MavenCompile implements Runnable
 
         } else
             {
-            LogOutput.save(RepoDetails.getMatricNo(repoUrl), repoName, repoName + " No pom.xml file!");
+                LogOutput.saveFiles(RepoDetails.getMatricNo(repoUrl), repoName, repoName + " No pom.xml file!");
             OutputResult.print(true, repoName, "No pom.xml file detected.", latch, totalRepo);
         }
     }

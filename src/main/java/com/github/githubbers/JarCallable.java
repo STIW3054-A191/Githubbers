@@ -43,7 +43,7 @@ public class JarCallable implements Callable<String>
 
             if (!errorMessage.toString().equals(""))
             {
-                LogOutput.save(matricNum, reName, errorMessage.toString());
+                LogOutput.saveFiles(matricNum, reName, errorMessage.toString());
                 return "error";
             }
 
