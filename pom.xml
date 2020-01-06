@@ -22,7 +22,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.1.2</version>
-                     <configuration>
+                <configuration>
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
@@ -80,6 +80,4 @@
             <version>3.0.1</version>
         </dependency>
     </dependencies>
-
-
 </project>
