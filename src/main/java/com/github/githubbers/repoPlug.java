@@ -1,4 +1,4 @@
-package com.github.macasyraf;
+package com.github.githubbers;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -35,7 +35,6 @@ class repoPlug {
                     }
                 }
             }
-            System.out.println(arrayList); // kindly delete this one if successfully configured the output correctly.
         } catch (IOException ie) {
             ie.printStackTrace();
         }
