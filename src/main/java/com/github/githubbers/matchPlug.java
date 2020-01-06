@@ -1,4 +1,4 @@
-package com.github.macasyraf;
+package com.github.githubbers;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

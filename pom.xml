@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.macasyraf</groupId>
+    <groupId>com.github.githubbers</groupId>
     <artifactId>oriented-Broccoli</artifactId>
     <version>1.0</version>
     <build>
@@ -27,7 +27,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.github.macasyraf.mainPlug</mainClass>
+                            <mainClass>com.github.githubbers.mainPlug</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
