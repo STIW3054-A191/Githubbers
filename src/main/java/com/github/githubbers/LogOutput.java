@@ -7,7 +7,7 @@ import java.util.logging.SimpleFormatter;
 public class LogOutput
 {
 
-    public static void save(String MatricNum, String ReName, String MessageDetail)
+    public static void saveFile(String MatricNum, String ReName, String MessageDetail)
     {
 
         String logFilePath = Directory.getLogPathFile() + MatricNum + ".log";
