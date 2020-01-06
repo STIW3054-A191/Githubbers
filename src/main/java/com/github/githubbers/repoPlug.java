@@ -8,37 +8,45 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
-class repoPlug {
+class repoPlug
+{
 
-    static ArrayList<String> getLink() {
+    static ArrayList<String> getLink()
+    {
 
         ArrayList<String> arrayList = new ArrayList<>();
-        try {
+        try
+        {
 
             final Document document = Jsoup.connect("https://github.com/STIW3054-A191/Assignments/issues/1").get();
             Elements elements = document.select("table").select("a");
 
-            for (Element array : elements) {
+            for (Element array : elements)
+            {
                 String elementLink = array.attr("href");
                 String theLink;
 
-                if (!elementLink.startsWith("http://cwiki")) {
+                if (!elementLink.startsWith("http://cwiki"))
+                {
 
-                    if (elementLink.endsWith(".git")) {
+                    if (elementLink.endsWith(".git"))
+                    {
                         theLink = elementLink.substring(0, elementLink.length() - 4);
-                    } else {
+                    } else
+                        {
                         theLink = elementLink;
                     }
 
-                    if (!arrayList.contains(theLink)) {
+                    if (!arrayList.contains(theLink))
+                    {
                         arrayList.add(theLink);
                     }
                 }
             }
-        } catch (IOException ie) {
+        } catch (IOException ie)
+        {
             ie.printStackTrace();
         }
-
         return arrayList;
     }
 

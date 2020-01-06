@@ -1,12 +1,12 @@
 package com.github.githubbers;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class matchPlug {
+class matchPlug
+{
 
-    boolean isMatch(String pattern, String link) {
-
+    boolean isMatch(String pattern, String link)
+    {
         Pattern justPat = Pattern.compile(pattern);
         Matcher justMatch = justPat.matcher(link);
         return justMatch.find();
