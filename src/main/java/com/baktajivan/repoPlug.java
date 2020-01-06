@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 class repoPlug {
 
-    public ArrayList<String> getLink() {
+    static ArrayList<String> getLink() {
 
         ArrayList<String> arrayList = new ArrayList<>();
         try {
@@ -20,21 +20,27 @@ class repoPlug {
 
             for (Element array : elements) {
                 String elementLink = array.attr("href");
+                String theLink;
 
-                if (elementLink.endsWith(".git")) {
-                    arrayList.add(elementLink.substring(0, elementLink.length() - 4));
-                } else {
-                    arrayList.add(elementLink);
+                if (!elementLink.startsWith("http://cwiki")) {
+
+                    if (elementLink.endsWith(".git")) {
+                        theLink = elementLink.substring(0, elementLink.length() - 4);
+                    } else {
+                        theLink = elementLink;
+                    }
+
+                    if (!arrayList.contains(theLink)) {
+                        arrayList.add(theLink);
+                    }
                 }
             }
-
+            System.out.println(arrayList); // kindly delete this one if successfully configured the output correctly.
         } catch (IOException ie) {
             ie.printStackTrace();
         }
 
         return arrayList;
-
-
     }
 
 }
