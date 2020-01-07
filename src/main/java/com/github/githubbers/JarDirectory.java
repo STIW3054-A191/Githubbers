@@ -2,25 +2,24 @@ package com.github.githubbers;
 import java.io.File;
 public class JarDirectory
 {
-    public static String getPath(String PomPath)
+    public static String getPath(String pathPom)
     {
 
-        String path = null;
+        String pathFile = null;
+        File dir = new File(pathPom.replaceAll("pom.xml", "target"));
+        String[] child1 = dir.list();
 
-        File dir = new File(PomPath.replaceAll("pom.xml", "target"));
-
-        String[] children = dir.list();
-        if (children != null)
+        if (child1 != null)
         {
-            for (String child : children)
+            for (String child2 : child1)
             {
-                File aChild = new File(dir, child);
-                if (!child.startsWith("original") && child.endsWith(".jar"))
+                File mainChild = new File(dir, child2);
+                if (!child2.startsWith("original") && child2.endsWith(".jar"))
                 {
-                    path = aChild.getPath();
+                    pathFile = mainChild.getPath();
                 }
             }
         }
-        return path;
+        return pathFile;
     }
 }

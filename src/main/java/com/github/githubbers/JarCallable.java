@@ -7,15 +7,15 @@ import java.util.concurrent.Callable;
 
 public class JarCallable implements Callable<String>
 {
-    private String matricNo, repoName;
-    private InputStream inputStream, errorStream;
+    private String matricNum, reName;
+    private InputStream inputStreamCall, errorStreamCall;
 
-    JarCallable(String MatricNo, String RepoName, InputStream InputStream, InputStream ErrorStream)
+    JarCallable(String MatricNum, String ReName, InputStream InputStreamCall, InputStream ErrorStreamCall)
     {
-        this.matricNo = MatricNo;
-        this.repoName = RepoName;
-        this.inputStream = InputStream;
-        this.errorStream = ErrorStream;
+        this.matricNum = MatricNum;
+        this.reName = ReName;
+        this.inputStreamCall = InputStreamCall;
+        this.errorStreamCall = ErrorStreamCall;
     }
 
     @Override
@@ -24,17 +24,17 @@ public class JarCallable implements Callable<String>
 
         try
         {
-            BufferedReader stdInput = new BufferedReader(new InputStreamReader(inputStream));
+            BufferedReader stdInput = new BufferedReader(new InputStreamReader(inputStreamCall));
             String output;
             while ((output = stdInput.readLine()) != null)
             {
-                try ( FileWriter writer = new FileWriter(Directory.getOutFolderPath() + matricNo + ".out", true))
+                try (FileWriter writer = new FileWriter(Directory.getOutputPathFile() + matricNum + ".out", true))
                 {
                     writer.write(output + "\n");
                 }
             }
 
-            BufferedReader stdError = new BufferedReader(new InputStreamReader(errorStream));
+            BufferedReader stdError = new BufferedReader(new InputStreamReader(errorStreamCall));
             StringBuilder errorMessage = new StringBuilder();
             while (stdError.ready())
             {
@@ -43,13 +43,13 @@ public class JarCallable implements Callable<String>
 
             if (!errorMessage.toString().equals(""))
             {
-                LogOutput.save(matricNo, repoName, errorMessage.toString());
+                LogOutput.saveFiles(matricNum, reName, errorMessage.toString());
                 return "error";
             }
 
-        } catch (Exception ex)
+        } catch (Exception e)
         {
-            ex.printStackTrace();
+            e.printStackTrace();
         }
 
         return "complete";
