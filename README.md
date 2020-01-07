@@ -7,28 +7,32 @@
 5. Nurshafiqah Diela Binti Abas      (259383)  
 
 # Introductions
-We are required to develop a small system using __MAVEN__ and __Java__ programming language. The system should be able to:
-1. Read data from a Github Issue page. Refer to the link below for the testing purpose.  
-   
-   https://github.com/STIW3054-A191/Main-Issues/issues/1
+We are required to develop a real-time system using the Java programming language (Maven). The system should be able to:
 
-2. Read data from a Github Wiki page. Refer to the link below for the testing purpose.
+1. Get a list of repositories from Github Issues. Refer to the link below for the testing purpose.  
+   https://github.com/STIW3054-A191/Assignments/issues/1
 
-   https://github.com/STIW3054-A191/Assignments/wiki/List_of_Student
+2. Download all the repositories from the list to your computer/laptop using Java threads.
 
-3. Compare the data and produce the following reports:
-   * List all students who have submitted the GitHub account.
-   * List all students who have not submitted the GitHub account.
+3. Compile the Java program for each repository. If the Java program cannot be compiled, send the error messages to a log file. The name of the log file MUST follow the following format. 
+>MatricNo.log (Example: 123456.log)
 
-4. Reporting format:
-```
-| No. | Matric | Name                                  | GitHub Link                 |
-|-----|--------|---------------------------------------|-----------------------------|
-| 1   | 243147 | Yao Yangjian                          | https://github.com/abcde    |
-| 2   | 245607 | Siti Nur Fatihah Binti Fauzi          | https://github.com/fghij    |
-```
+4. Run the program and store the output in a text file. The name of the output file MUST follow the following format. 
+>MatricNo.out (Example: 123456.out)
 
-5. Reporting file: All the results must be displayed in MS Excel file.
+5. Generate software metrics using CKJM (https://www.spinellis.gr/sw/ckjm/) for each Java program and store the result in a text file. The name of the text file MUST follow the following format. 
+>MatricNo.txt (Example: 123456.txt)
+
+6. Store the accumulative metrics for all the Java programs in MS Excel. The example of the reporting format is shown below:
+
+| No. | Matric | Name                             | WMC  | DIT | NOC | CBO | RFC | LCOM |
+|-----|--------|----------------------------------|------|-----|-----|-----|-----|------|
+| 1   | 243147 | Yao Yangjian                     | 67   | 103 | xx  | xx  | xx  | xx   |
+| 2   | 245607 | Siti Nur Fatihah Binti Fauzi     | 203  | 59  | xx  | xx  | xx  | xx   |
+
+7. Generate a bar graph for each metric from the excel file and store all the graphs in a pdf file.
+
+8. Calculate the execution time.
 
 More details of the project requirements will be listed here: https://github.com/STIW3054-A191/Assignments/wiki/Group-Project
 
