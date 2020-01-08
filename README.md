@@ -38,7 +38,7 @@ More details of the project requirements will be listed [here.](https://github.c
 
 # Table of Content
 
-1. [Java Doc](https://github.com/STIW3054-A191/Githubbers/wiki/JavaDoc)
+1. [Java Documentation](https://github.com/STIW3054-A191/Githubbers/wiki/Java-Documentation)
 2. [Reference](https://github.com/STIW3054-A191/Githubbers/wiki/Reference)
 3. [Result/Output](https://github.com/STIW3054-A191/Githubbers/wiki/Result-Output)
 4. [UML Class Diagram](https://github.com/STIW3054-A191/Githubbers/wiki/UML-Class-Diagram)
