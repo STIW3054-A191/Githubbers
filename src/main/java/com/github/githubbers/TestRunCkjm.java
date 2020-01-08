@@ -35,6 +35,7 @@ public class TestRunCkjm implements Runnable {
                 LogOutput.saveFiles(matricNum, reName, "No Class File!");
                 OutputResult.print(true, reName, "No Class File!", latch, latchAll);
             }
+
         } else {
 
             CkjmOutputHandler outputHandler = new CkjmOutputHandler() {
