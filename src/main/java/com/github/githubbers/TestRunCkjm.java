@@ -60,7 +60,6 @@ public class TestRunCkjm implements Runnable {
                             synchronized (TestRunCkjm.class) {
                                 CkjmToExcel.addData(matricNum, unknownMatricNum, wmc, dit, noc, cbo, rfc, lcom);
                             }
-
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
