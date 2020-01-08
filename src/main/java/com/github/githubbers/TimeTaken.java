@@ -23,7 +23,7 @@ public class TimeTaken
         long seconds = TimeUnit.MILLISECONDS.toSeconds(timeElapsed) % 60;
         long milliseconds = timeElapsed % 1000;
 
-        System.out.print("\nExecution time : ");
+        System.out.print("\nExecution time: ");
 
         if (days != 0)
         {

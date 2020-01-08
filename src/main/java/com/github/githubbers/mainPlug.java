@@ -18,17 +18,17 @@ public class mainPlug
         {
             for (String s : args)
             {
-        if (s.endsWith(".class"))
-        {
-            TestCkjm.test(s);
-        } else
+                if (s.endsWith(".class"))
+                {
+                    TestCkjm.test(s);
+                } else
             {
             File dir = new File(s);
         if (dir.isDirectory())
         {
             String pomPath = PomDirectory.getPath(dir);
-        if (pomPath != null)
-        {
+            if (pomPath != null)
+            {
         if (MavenBuild.cleanInstall(pomPath) == 0)
         {
             System.out.println("Maven build completed.");
@@ -57,7 +57,7 @@ public class mainPlug
 
             if (proc.waitFor(1, TimeUnit.MINUTES))
             {
-                                        proc.destroy();
+                proc.destroy();
             }
 
         } catch (IOException | InterruptedException e)
@@ -67,7 +67,7 @@ public class mainPlug
 
         } else
             {
-            System.err.println("Build failure.");
+            System.err.println("Build failed.");
         }
 
         } else
@@ -76,7 +76,7 @@ public class mainPlug
         }
         } else
             {
-            System.err.println("Please enter the correct folder/class path.");
+            System.err.println("Please enter the correct folder or class path.");
         }
         }
             }

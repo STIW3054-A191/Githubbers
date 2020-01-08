@@ -6,22 +6,20 @@ import java.util.concurrent.CountDownLatch;
 
 public class CloneRepo implements Runnable
 {
-
     private String url;
-    private int repoTotal;
+    private int justRepo;
     private CountDownLatch latch;
 
-    public CloneRepo(String Url, int RepoTotal, CountDownLatch Latch)
+    public CloneRepo(String Url, int JustRepo, CountDownLatch Latch)
     {
         this.url = Url;
-        this.repoTotal = RepoTotal;
+        this.justRepo = JustRepo;
         this.latch = Latch;
     }
 
     @Override
     public void run()
     {
-
         try
         {
             Git.cloneRepository()
@@ -33,6 +31,6 @@ public class CloneRepo implements Runnable
             e.printStackTrace();
         }
 
-        OutputResult.print(false, RepoDetails.getName(url), "Cloning successfully completed.", latch, repoTotal);
+        OutputResult.print(false, RepoDetails.getName(url), "Cloning successfully completed.", latch, justRepo);
     }
 }

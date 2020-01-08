@@ -7,18 +7,20 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class CkjmToExcel implements ExcelData {
+public class CkjmToExcel implements ExcelData
+{
     public static void addData(String MatricNum, ArrayList<String> UnknownMatricNum, int WMC, int DIT, int NOC, int CBO, int RFC, int LCOM) {
-        try {
+        try
+        {
             FileInputStream file = new FileInputStream(fileName);
             XSSFWorkbook workbook = new XSSFWorkbook(file);
             XSSFSheet sheet = workbook.getSheet(sheetName);
-
             boolean foundInList = false;
-            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
 
-                if (sheet.getRow(i).getCell(1).toString().equals(MatricNum)) {
-
+            for (int i = 1; i <= sheet.getLastRowNum(); i++)
+            {
+                if (sheet.getRow(i).getCell(1).toString().equals(MatricNum))
+                {
                     foundInList = true;
                     Row row = sheet.getRow(i);
                     row.createCell(3).setCellValue(WMC);
@@ -31,14 +33,15 @@ public class CkjmToExcel implements ExcelData {
                 }
             }
 
-            if (!foundInList) {
+            if (!foundInList)
+            {
                 UnknownMatricNum.add(MatricNum);
             }
             ExcelOutput.output(workbook, sheet);
 
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
-
 }

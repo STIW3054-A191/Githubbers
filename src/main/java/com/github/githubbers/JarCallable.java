@@ -46,12 +46,10 @@ public class JarCallable implements Callable<String>
                 LogOutput.saveFiles(matricNum, reName, errorMessage.toString());
                 return "error";
             }
-
         } catch (Exception e)
         {
             e.printStackTrace();
         }
-
         return "complete";
     }
 }

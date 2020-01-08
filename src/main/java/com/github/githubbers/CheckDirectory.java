@@ -36,7 +36,8 @@ public class CheckDirectory
                 for (String child2 : child1)
                 {
                     boolean success = deleteDirFile(new File(dir, child2));
-                    if (!success) {
+                    if (!success)
+                    {
                         return false;
                     }
                 }

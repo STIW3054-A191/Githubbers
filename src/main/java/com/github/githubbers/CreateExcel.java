@@ -6,14 +6,16 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 
-public class CreateExcel implements ExcelData {
-    public static void create() {
-
+public class CreateExcel implements ExcelData
+{
+    public static void create()
+    {
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet(sheetName);
         Row row = sheet.createRow(0);
 
-        for (int i = 0; i < title.length; i++) {
+        for (int i = 0; i < title.length; i++)
+        {
             row.createCell(i).setCellValue(title[i]);
         }
 
@@ -22,10 +24,10 @@ public class CreateExcel implements ExcelData {
         font.setBold(true);
         style.setFont(font);
 
-        for (int i = 0; i < title.length; i++) {
+        for (int i = 0; i < title.length; i++)
+        {
             row.getCell(i).setCellStyle(style);
         }
         ExcelOutput.output(workbook, sheet);
-
     }
 }
