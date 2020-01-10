@@ -19,7 +19,7 @@ public class ExcelOutput implements ExcelData
             workbook.write(fileOut);
             fileOut.close();
             workbook.close();
-
+            
         } catch (Exception e)
         {
             System.err.println("Failed to create or save the Excel file due to unexpected error.");

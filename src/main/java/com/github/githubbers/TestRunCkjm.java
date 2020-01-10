@@ -7,6 +7,8 @@ import java.util.concurrent.CountDownLatch;
 import gr.spinellis.ckjm.CkjmOutputHandler;
 import gr.spinellis.ckjm.ClassMetrics;
 import gr.spinellis.ckjm.MetricsFilter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TestRunCkjm implements Runnable
 {
@@ -72,11 +74,14 @@ public class TestRunCkjm implements Runnable
                             synchronized (TestRunCkjm.class)
                             {
                                 CkjmToExcel.addData(matricNum, unknownMatricNum, wmc, dit, noc, cbo, rfc, lcom);
+                                
                             }
                         }
                     } catch (IOException e)
                     {
                         e.printStackTrace();
+                    } catch (Exception ex) {
+                        Logger.getLogger(TestRunCkjm.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             };
