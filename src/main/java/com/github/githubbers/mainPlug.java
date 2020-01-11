@@ -1,11 +1,13 @@
 package com.github.githubbers;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+
 
 public class mainPlug
 {
@@ -32,8 +34,10 @@ public class mainPlug
         if (MavenBuild.cleanInstall(pomPath) == 0)
         {
             System.out.println("Maven build completed.");
+            
+            
             System.out.println("\nGoing to test CKJM!");
-            ArrayList<String> arrClass = null;
+            ArrayList<String> arrClass = ClassCkjm.findClass(dir);
             //ClassPath.findClass(dir);
         if (!arrClass.isEmpty())
         {
@@ -90,10 +94,9 @@ public class mainPlug
         System.out.println("\nChecking folder!\n/target/output/");
         CheckDirectory.checkDir();
 
-        /* Create Excel file and get List Of Students
         System.out.println("\nCreate Excel file and get List Of Students...");
         CreateExcel.create();
-        GetListOfStudents.get(); */
+        ExcelListStudents.get(); 
 
         System.out.println("\nCheck total repositories.");
         ArrayList<String> arrLink = repoPlug.getLink();
@@ -140,7 +143,32 @@ public class mainPlug
         execRunJar.shutdown();
         latchRunJar.await();
         System.out.println("All running Jar completed.");
+        
+        
+        System.out.println("\nRun for CKJM File...");
+        PrintStream console = System.err;
+        ArrayList<String> unknownMatricNo = new ArrayList <>();
+        CountDownLatch latchTestCkjm = new  CountDownLatch(buildSuccessRepo.size());
+        ExecutorService execTestCkjm = Executors.newFixedThreadPool(Threads.availableLightThreads());
+        for(String[] repoDetails : buildSuccessRepo){
+            Thread threadTestCkjm = new Thread(new TestRunCkjm(repoDetails[1], repoDetails[2], latchTestCkjm, buildSuccessRepo.size(), unknownMatricNo, console));
+           execTestCkjm.execute(threadTestCkjm);
+        }
+        execTestCkjm.shutdown();
+        latchTestCkjm.await();
+        System.out.println("Test CKJM Completed and Success !");
 
+        if(unknownMatricNo.size()>0){
+            for(String matric : unknownMatricNo){
+                System.err.println("\nMatric No "+matric+" not found in list of students!");
+            }
+        }
+
+        System.out.println("\nCreate Bar Chart...");
+        createBarChart.create();
+        System.out.println("\nBar Chart are created Successfully");
+
+       
         TimeTaken.endAndOutput();
     }
 }
