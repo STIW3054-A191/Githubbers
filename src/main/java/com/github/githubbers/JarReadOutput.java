@@ -24,22 +24,22 @@ public class JarReadOutput
 
             try
             {
-                BufferedReader studentInput = new BufferedReader(new InputStreamReader(inputStreamCall));
+                BufferedReader stdInput = new BufferedReader(new InputStreamReader(inputStreamCall));
                 String output;
-                while ((output = studentInput.readLine()) != null)
+                while ((output = stdInput.readLine()) != null)
                 {
                     System.out.println(output + "\n");
                 }
 
-                BufferedReader studentError = new BufferedReader(new InputStreamReader(errorStreamCall));
-                while (studentError.ready())
+                BufferedReader stdError = new BufferedReader(new InputStreamReader(errorStreamCall));
+                while (stdError.ready())
                 {
-                    System.err.println(studentError.readLine() + "\n");
+                    System.err.println(stdError.readLine() + "\n");
                 }
 
-            } catch (Exception e)
+            } catch (Exception ex)
             {
-                e.printStackTrace();
+                ex.printStackTrace();
             }
         }
     }

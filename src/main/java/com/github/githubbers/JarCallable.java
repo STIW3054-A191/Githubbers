@@ -10,10 +10,10 @@ public class JarCallable implements Callable<String>
     private String matricNum, reName;
     private InputStream inputStreamCall, errorStreamCall;
 
-    JarCallable(String MatricNum, String ReName, InputStream InputStreamCall, InputStream ErrorStreamCall)
+    JarCallable(String MatricNum, String RepoName, InputStream InputStreamCall, InputStream ErrorStreamCall)
     {
         this.matricNum = MatricNum;
-        this.reName = ReName;
+        this.reName = RepoName;
         this.inputStreamCall = InputStreamCall;
         this.errorStreamCall = ErrorStreamCall;
     }
@@ -28,7 +28,7 @@ public class JarCallable implements Callable<String>
             String output;
             while ((output = stdInput.readLine()) != null)
             {
-                try (FileWriter writer = new FileWriter(Directory.getOutputPathFile() + matricNum + ".out", true))
+                try (FileWriter writer = new FileWriter(OutputPathFile.getOutPathFile() + matricNum + ".out", true))
                 {
                     writer.write(output + "\n");
                 }

@@ -9,27 +9,27 @@ public class PomDirectory
         String path = null;
         if (dir.isDirectory())
         {
-            String[] children = dir.list();
-            if (children != null)
+            String[] child1 = dir.list();
+            if (child1 != null)
             {
-                for (String child : children)
+                for (String child2 : child1)
                 {
-                    File aChild = new File(dir, child);
-                    if (child.equals("pom.xml"))
+                    File mainChild = new File(dir, child2);
+                    if (child2.equals("pom.xml"))
                     {
-                        path = aChild.getPath();
+                        path = mainChild.getPath();
                         break;
                     }
                 }
 
                 if (path == null)
                 {
-                    for (String child : children)
+                    for (String child2 : child1)
                     {
-                        File aChild = new File(dir, child);
-                        if (aChild.isDirectory())
+                        File mainChild = new File(dir, child2);
+                        if (mainChild.isDirectory())
                         {
-                            path = getPath(aChild);
+                            path = getPath(mainChild);
                             if (path != null)
                             {
                                 break;

@@ -2,11 +2,11 @@ package com.github.githubbers;
 import java.io.File;
 public class JarDirectory
 {
-    public static String getPath(String pathPom)
+    public static String getPath(String PomDirectory)
     {
 
         String pathFile = null;
-        File dir = new File(pathPom.replaceAll("pom.xml", "target"));
+        File dir = new File(PomDirectory.replaceAll("pom.xml", "target"));
         String[] child1 = dir.list();
 
         if (child1 != null)

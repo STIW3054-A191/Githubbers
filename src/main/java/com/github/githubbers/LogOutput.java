@@ -7,21 +7,18 @@ import java.util.logging.SimpleFormatter;
 public class LogOutput
 {
 
-    public static void saveFiles(String MatricNum, String ReName, String MessageDetail)
-    {
+   public static void saveFiles(String MatricNo, String RepoName, String Message) {
 
-        String logFilePath = Directory.getLogPathFile() + MatricNum + ".log";
-        try
-        {
+        String logFilePath = OutputPathFile.getLogPathFile() + MatricNo + ".log";
+        try {
             FileHandler fileHandler = new FileHandler(logFilePath, true);
             fileHandler.setFormatter(new SimpleFormatter());
-            Logger logger = Logger.getLogger(ReName);
+            Logger logger = Logger.getLogger(RepoName);
             logger.addHandler(fileHandler);
             logger.setUseParentHandlers(false);
-            logger.warning(MessageDetail);
+            logger.warning(Message);
             fileHandler.close();
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

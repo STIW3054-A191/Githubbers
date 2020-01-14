@@ -4,23 +4,20 @@ import java.util.concurrent.CountDownLatch;
 public class OutputResult
 {
 
-    public static void print(boolean Error, String ReName, String Comment, CountDownLatch Latch, int LatchAll)
-    {
+    
+    public static void print(boolean Error, String RepoName, String Comment, CountDownLatch Latch, int TotalLatch) {
 
-        synchronized (OutputResult.class)
-        {
+        synchronized (OutputResult.class) {
 
-            if (Error)
-            {
+            if (Error) {
                 System.err.format("%-10s %-40s %-20s\n",
-                        LatchAll - Latch.getCount() + 1 + "/" + LatchAll,
-                        ReName,
+                        TotalLatch - Latch.getCount() + 1 + "/" + TotalLatch,
+                        RepoName,
                         Comment);
-            } else
-                {
+            } else {
                 System.out.format("%-10s %-40s %-20s\n",
-                        LatchAll - Latch.getCount() + 1 + "/" + LatchAll,
-                        ReName,
+                        TotalLatch - Latch.getCount() + 1 + "/" + TotalLatch,
+                        RepoName,
                         Comment);
 
             }

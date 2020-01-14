@@ -8,6 +8,30 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import com.github.githubbers.ClassCkjm;
+import com.github.githubbers.TestCkjm;
+import com.github.githubbers.TestRunCkjm;
+import com.github.githubbers.CloneRepo;
+import com.github.githubbers.RepoDetails;
+import com.github.githubbers.CreateExcel;
+import com.github.githubbers.GetListStudents;
+import com.github.githubbers.createBarChart;
+import com.github.githubbers.JarDirectory;
+import com.github.githubbers.JarRun;
+import com.github.githubbers.JarReadOutput;
+import com.github.githubbers.MavenBuild;
+import com.github.githubbers.MavenCompile;
+import com.github.githubbers.MavenOrigin;
+import com.github.githubbers.PomDirectory;
+import com.github.githubbers.OutputResult;
+
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.concurrent.*;
+
+
+
 
 public class mainPlug
 {
@@ -96,7 +120,7 @@ public class mainPlug
 
         System.out.println("\nCreate Excel file and get List Of Students...");
         CreateExcel.create();
-        ExcelListStudents.get(); 
+        GetListStudents.get(); 
 
         System.out.println("\nCheck total repositories.");
         ArrayList<String> arrLink = repoPlug.getLink();
@@ -147,20 +171,20 @@ public class mainPlug
         
         System.out.println("\nRun for CKJM File...");
         PrintStream console = System.err;
-        ArrayList<String> unknownMatricNo = new ArrayList <>();
+        ArrayList<String> unknownMatricNum = new ArrayList <>();
         CountDownLatch latchTestCkjm = new  CountDownLatch(buildSuccessRepo.size());
         ExecutorService execTestCkjm = Executors.newFixedThreadPool(Threads.availableLightThreads());
         for(String[] repoDetails : buildSuccessRepo){
-            Thread threadTestCkjm = new Thread(new TestRunCkjm(repoDetails[1], repoDetails[2], latchTestCkjm, buildSuccessRepo.size(), unknownMatricNo, console));
+            Thread threadTestCkjm = new Thread(new TestRunCkjm(repoDetails[1], repoDetails[2], latchTestCkjm, buildSuccessRepo.size(), unknownMatricNum, console));
            execTestCkjm.execute(threadTestCkjm);
         }
         execTestCkjm.shutdown();
         latchTestCkjm.await();
         System.out.println("Test CKJM Completed and Success !");
 
-        if(unknownMatricNo.size()>0){
-            for(String matric : unknownMatricNo){
-                System.err.println("\nMatric No "+matric+" not found in list of students!");
+        if(unknownMatricNum.size()>0){
+            for(String matric : unknownMatricNum){
+                System.err.println("\nMatric No "+ matric +" not found in list of students!");
             }
         }
 

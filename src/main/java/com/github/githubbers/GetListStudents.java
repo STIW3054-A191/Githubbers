@@ -9,7 +9,7 @@ import org.jsoup.Jsoup;
 
 import java.io.FileInputStream;
 
-public class ExcelListStudents implements ExcelData
+public class GetListStudents implements ExcelData
 {
     public static void get()
     {

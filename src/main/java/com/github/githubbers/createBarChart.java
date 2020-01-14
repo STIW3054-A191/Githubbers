@@ -38,13 +38,13 @@ import org.jfree.ui.ApplicationFrame;
  */
 public class createBarChart extends ApplicationFrame implements ExcelData {
     
-    private createBarChart (String chart) throws DocumentException, IOException{
-        super (chart);
+    private createBarChart (String tite2) throws DocumentException, IOException{
+        super (tite2);
         
         final CategoryDataset dataset = createDataset();
         final JFreeChart barchart = createChart(dataset);
 
-        String pdfFilePath = Directory.getLogPathFile()+ "BarChart.pdf";
+        String pdfFilePath = OutputPathFile.getOutputPathFile()+ "BarChart.pdf";
         OutputStream PDF = new FileOutputStream(new File(pdfFilePath));
         Document document = new Document(PageSize.A4.rotate());
         PdfWriter writer = PdfWriter.getInstance(document, PDF);
@@ -79,7 +79,7 @@ public class createBarChart extends ApplicationFrame implements ExcelData {
         XSSFSheet sheet = wb.getSheet(sheetName);
 
         String[] userName = new String[] {"WMC", "DIT", "NOC", "CBO", "RFC", "LCOM"};
-        String[] MatricNo = new String[sheet.getLastRowNum()];
+        String[] MatricNum = new String[sheet.getLastRowNum()];
         double[] arrWmc = new double[sheet.getLastRowNum()];
         double[] arrDit = new double[sheet.getLastRowNum()];
         double[] arrNoc = new double[sheet.getLastRowNum()];
@@ -88,7 +88,7 @@ public class createBarChart extends ApplicationFrame implements ExcelData {
         double[] arrLcom = new double[sheet.getLastRowNum()];
 
         for (int i=1; i <= sheet.getLastRowNum(); i++ ) {
-            MatricNo[(i-1)] = sheet.getRow(i).getCell(1).toString();
+            MatricNum[(i-1)] = sheet.getRow(i).getCell(1).toString();
 
             String wmc,dit,noc,cbo,rfc,lcom ;
             if(sheet.getRow(i).getCell(3)==null){
@@ -124,12 +124,12 @@ public class createBarChart extends ApplicationFrame implements ExcelData {
                 arrLcom
         };
 
-        return DatasetUtilities.createCategoryDataset(userName,MatricNo,data);
+        return DatasetUtilities.createCategoryDataset(userName,MatricNum,data);
     }
 
     private JFreeChart createChart(final CategoryDataset dataset) {
 
-        final JFreeChart chart = ChartFactory.createStackedBarChart(
+        final JFreeChart chart = ChartFactory.createBarChart(
                 " Bar Chart ", "", "",
                 dataset, PlotOrientation.VERTICAL, true, true, false);
 
