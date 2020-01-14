@@ -1,13 +1,13 @@
 package com.github.githubbers;
-
+import com.github.githubbers.OutputResult;
 import java.util.ArrayList;
 import java.io.File;
 
 public class ClassCkjm
 {
-    public static ArrayList<String> getPath(String ReName)
+     static ArrayList<String> getPath(String RepoName)
     {
-        return findClass(new File(Directory.getRepoPathFile() + ReName));
+        return findClass(new File(OutputPathFile.getRepoPathFile() + RepoName));
     }
 
     public static ArrayList<String> findClass(File dir)

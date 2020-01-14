@@ -5,16 +5,14 @@ import java.util.Collections;
 
 public class MavenBuild
 {
-    public static int cleanInstall(String pomPath)
-    {
+     public static int cleanInstall(String pomPath){
         int result = 1;
         MavenOrigin.setHome();
         InvocationRequest request = new DefaultInvocationRequest();
         request.setPomFile(new File(pomPath));
         request.setGoals(Collections.singletonList("clean install"));
 
-        try
-        {
+        try {
 
             Invoker invoker = new DefaultInvoker();
             invoker.setLogger(new PrintStreamLogger(System.out, InvokerLogger.ERROR));
@@ -26,8 +24,7 @@ public class MavenBuild
 
             result = invocationResult.getExitCode();
 
-        } catch (MavenInvocationException e)
-        {
+        } catch (MavenInvocationException e) {
             e.printStackTrace();
         }
         return result;

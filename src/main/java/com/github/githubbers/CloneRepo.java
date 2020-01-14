@@ -24,13 +24,13 @@ public class CloneRepo implements Runnable
         {
             Git.cloneRepository()
                     .setURI(url + ".git")
-                    .setDirectory(new File(Directory.getOutputPathFile() + RepoDetails.getName(url)))
+                    .setDirectory(new File(OutputPathFile.getRepoPathFile() + RepoDetails.getRepoName(url)))
                     .call();
         } catch (GitAPIException e)
         {
             e.printStackTrace();
         }
 
-        OutputResult.print(false, RepoDetails.getName(url), "Cloning successfully completed.", latch, justRepo);
+        OutputResult.print(false, RepoDetails.getRepoName(url), "Cloning successfully completed.", latch, justRepo);
     }
 }

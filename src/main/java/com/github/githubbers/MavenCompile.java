@@ -7,14 +7,14 @@ import org.apache.maven.shared.invoker.*;
 
 public class MavenCompile implements Runnable
 {
-    private String repoUrl;
+     private String url;
     private int totalRepo;
     private CountDownLatch latch;
     private ArrayList<String[]> buildSuccessRepo;
 
     public MavenCompile(String RepoUrl, int TotalRepo, CountDownLatch Latch, ArrayList<String[]> BuildSuccessRepo)
     {
-        this.repoUrl = RepoUrl;
+         this.url = RepoUrl;
         this.totalRepo = TotalRepo;
         this.latch = Latch;
         this.buildSuccessRepo = BuildSuccessRepo;
@@ -23,19 +23,17 @@ public class MavenCompile implements Runnable
     @Override
     public void run()
     {
-        String repoPath = Directory.getOutputPathFile() + RepoDetails.getName(repoUrl);
-        String repoName = RepoDetails.getName(repoUrl);
+        String repoPath = OutputPathFile.getRepoPathFile() + RepoDetails.getRepoName(url);
+       String repoName = RepoDetails.getRepoName(url);
 
         String pomPath = PomDirectory.getPath(new File(repoPath));
-        if (pomPath != null)
-        {
+        if (pomPath != null) {
 
             InvocationRequest request = new DefaultInvocationRequest();
             request.setPomFile(new File(pomPath));
             request.setGoals(Collections.singletonList("clean install"));
 
-            try
-            {
+            try {
 
                 Invoker invoker = new DefaultInvoker();
                 invoker.setLogger(new PrintStreamLogger(System.out, InvokerLogger.ERROR));
@@ -49,25 +47,23 @@ public class MavenCompile implements Runnable
 
                 final InvocationResult invocationResult = invoker.execute(request);
 
-                if (invocationResult.getExitCode() == 0)
-                {
-                    buildSuccessRepo.add(new String[]{pomPath, repoName, RepoDetails.getMatricNo(repoUrl)});
-                    OutputResult.print(false, repoName, "Build succeed.", latch, totalRepo);
-                } else
-                    {
-                        LogOutput.saveFiles(RepoDetails.getMatricNo(repoUrl), repoName, output.toString());
+                if (invocationResult.getExitCode() == 0) {
+                    buildSuccessRepo.add(new String[]{pomPath, repoName, RepoDetails.getMatric(url)});
+                    OutputResult.print(false, repoName, "Build Success !", latch, totalRepo);
+                } else {
+                    //Save error to log
+                    LogOutput.saveFiles(RepoDetails.getMatric(url), repoName, output.toString());
                     OutputResult.print(true, repoName, "Build Failure !", latch, totalRepo);
                 }
 
-            } catch (MavenInvocationException e)
-            {
+            } catch (MavenInvocationException e) {
                 e.printStackTrace();
             }
 
-        } else
-            {
-                LogOutput.saveFiles(RepoDetails.getMatricNo(repoUrl), repoName, repoName + " No pom.xml file!");
-            OutputResult.print(true, repoName, "No pom.xml file detected.", latch, totalRepo);
+        } else {
+            //Save error to log
+            LogOutput.saveFiles(RepoDetails.getMatric(url), repoName, repoName + " No pom.xml file !");
+            OutputResult.print(true, repoName, "No pom.xml file !", latch, totalRepo);
         }
     }
 }

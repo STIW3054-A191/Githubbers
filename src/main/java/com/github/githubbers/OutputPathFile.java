@@ -1,10 +1,10 @@
 package com.github.githubbers;
 import java.net.URL;
-public class Directory
+public class OutputPathFile
 {
     public static String getOutputPathFile()
     {
-        URL location = Directory.class.getProtectionDomain().getCodeSource().getLocation();
+        URL location = OutputPathFile.class.getProtectionDomain().getCodeSource().getLocation();
         return location.getFile().substring(1).split("target")[0]+"target/output/";
     }
 
@@ -23,7 +23,7 @@ public class Directory
         return getOutputPathFile() + "out/";
     }
 
-    public static String getTextPathFile()
+    public static String getTxtPathFile()
     {
         return getOutputPathFile() + "txt/";
     }

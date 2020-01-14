@@ -4,6 +4,11 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 
+import com.github.githubbers.LogOutput;
+import com.github.githubbers.CkjmToExcel;
+import com.github.githubbers.ClassCkjm;
+import com.github.githubbers.OutputPathFile;
+import com.github.githubbers.OutputResult;
 import gr.spinellis.ckjm.CkjmOutputHandler;
 import gr.spinellis.ckjm.ClassMetrics;
 import gr.spinellis.ckjm.MetricsFilter;
@@ -12,16 +17,16 @@ import java.util.logging.Logger;
 
 public class TestRunCkjm implements Runnable
 {
-    private String reName, matricNum;
+    private String repoName, matricNo;
     private CountDownLatch latch;
     private int latchAll;
     private ArrayList<String> unknownMatricNum;
     private PrintStream console;
 
-    public TestRunCkjm(String ReName, String MatricNum, CountDownLatch Latch, int LatchAll, ArrayList<String> UnknownMatricNum, PrintStream Console)
+    public TestRunCkjm(String RepoName, String MatricNum, CountDownLatch Latch, int LatchAll, ArrayList<String> UnknownMatricNum, PrintStream Console)
     {
-        this.reName = ReName;
-        this.matricNum = MatricNum;
+        this.repoName = RepoName;
+        this.matricNo = MatricNum;
         this.latch = Latch;
         this.latchAll = LatchAll;
         this.unknownMatricNum = UnknownMatricNum;
@@ -32,15 +37,15 @@ public class TestRunCkjm implements Runnable
     public void run()
     {
 
-        final ArrayList<String> classPathArr = ClassCkjm.getPath(reName);
+        final ArrayList<String> classPathArr = ClassCkjm.getPath(repoName);
 
         if (classPathArr.isEmpty())
         {
             synchronized (TestRunCkjm.class)
             {
                 System.setErr(console);
-                LogOutput.saveFiles(matricNum, reName, "No class file detected.");
-                OutputResult.print(true, reName, "No class file detected.", latch, latchAll);
+                LogOutput.saveFiles(matricNo, repoName, "No file detected.");
+                OutputResult.print(true, repoName, "No class file detected.", latch, latchAll);
             }
 
         } else
@@ -61,7 +66,7 @@ public class TestRunCkjm implements Runnable
                     lcom += c.getLcom();
                     i++;
 
-                    try (FileWriter writer = new FileWriter(Directory.getTextPathFile() + matricNum + ".txt", true))
+                    try (FileWriter writer = new FileWriter(OutputPathFile.getTxtPathFile() + matricNo + ".txt", true))
                     {
                         writer.write(name + "\n WMC: " + c.getWmc() + ",  DIT: " + c.getDit() + ", NOC: " + c.getNoc() + ", CBO: " + c.getCbo()
                                 + ", RFC: " + c.getRfc() + ", LCOM: " + c.getLcom() + "\n");
@@ -73,7 +78,7 @@ public class TestRunCkjm implements Runnable
 
                             synchronized (TestRunCkjm.class)
                             {
-                                CkjmToExcel.addData(matricNum, unknownMatricNum, wmc, dit, noc, cbo, rfc, lcom);
+                                CkjmToExcel.addData(matricNo, unknownMatricNum, wmc, dit, noc, cbo, rfc, lcom);
                                 
                             }
                         }
@@ -92,14 +97,14 @@ public class TestRunCkjm implements Runnable
                 System.setErr(ps);
                 String[] stringArray = classPathArr.toArray(new String[0]);
                 MetricsFilter.runMetrics(stringArray, outputHandler);
+                
                 System.setErr(console);
-
                 if (!byteArrayOutputStream.toString().equals(""))
                 {
-                    LogOutput.saveFiles(matricNum, reName, byteArrayOutputStream.toString());
+                    LogOutput.saveFiles(matricNo, repoName, byteArrayOutputStream.toString());
                 }
             }
-            OutputResult.print(false, reName, "CKJM tested completed.", latch, latchAll);
+            OutputResult.print(false, repoName, "CKJM tested completed.", latch, latchAll);
         }
     }
 

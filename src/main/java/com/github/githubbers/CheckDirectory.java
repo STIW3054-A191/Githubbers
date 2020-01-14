@@ -5,16 +5,16 @@ public class CheckDirectory
 
     public static void checkDir()
     {
-        File repoFolder = new File(Directory.getRepoPathFile());
+        File repoFolder = new File(OutputPathFile.getRepoPathFile());
         if (repoFolder.exists())
         {
-            deleteDirFile(repoFolder);
+            deleteDir(repoFolder);
         }
 
         makeDirFile(repoFolder);
-        makeDirFile(new File(Directory.getLogPathFile()));
-        makeDirFile(new File(Directory.getOutPathFile()));
-        makeDirFile(new File(Directory.getTextPathFile()));
+        makeDirFile(new File(OutputPathFile.getLogPathFile()));
+        makeDirFile(new File(OutputPathFile.getOutPathFile()));
+        makeDirFile(new File(OutputPathFile.getTxtPathFile()));
 
     }
 
@@ -26,7 +26,7 @@ public class CheckDirectory
         }
     }
 
-    private static boolean deleteDirFile(File dir)
+    private static boolean deleteDir(File dir)
     {
         if (dir.isDirectory())
         {
@@ -35,7 +35,7 @@ public class CheckDirectory
             {
                 for (String child2 : child1)
                 {
-                    boolean success = deleteDirFile(new File(dir, child2));
+                    boolean success = deleteDir(new File(dir, child2));
                     if (!success)
                     {
                         return false;

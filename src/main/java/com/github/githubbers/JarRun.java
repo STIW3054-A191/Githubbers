@@ -9,10 +9,10 @@ public class JarRun implements Runnable
     private CountDownLatch latch;
     private int latchAll;
 
-    public JarRun(String PathPom, String ReName, String MatricNum, CountDownLatch Latch, int LatchAll)
+    public JarRun(String PomDirectory, String RepoName, String MatricNum, CountDownLatch Latch, int LatchAll)
     {
-        this.pathPom = PathPom;
-        this.reName = ReName;
+        this.pathPom = PomDirectory;
+        this.reName = RepoName;
         this.matricNum = MatricNum;
         this.latch = Latch;
         this.latchAll = LatchAll;
@@ -25,7 +25,7 @@ public class JarRun implements Runnable
         try
         {
             Runtime rTime = Runtime.getRuntime();
-            Process process = rTime.exec("java -jar " + JarDirectory.getPath(pathPom), null, new File(Directory.getOutputPathFile() + reName));
+            Process process = rTime.exec("java -jar " + JarDirectory.getPath(pathPom), null, new File(OutputPathFile.getRepoPathFile() + reName));
 
             FutureTask<String> futureTask = new FutureTask<>(new JarCallable(matricNum, reName, process.getInputStream(), process.getErrorStream()));
             new Thread(futureTask).start();
